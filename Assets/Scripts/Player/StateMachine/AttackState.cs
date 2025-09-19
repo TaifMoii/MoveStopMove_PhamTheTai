@@ -8,7 +8,6 @@ public class AttackState : IState
     public void OnEnter(PlayerController player)
     {
         player.Attack();
-        Debug.Log("attack");
         timeDelay = 0;
     }
 
@@ -21,7 +20,7 @@ public class AttackState : IState
         }
         else
         {
-            if (timeDelay >= 2f)
+            if (timeDelay >= 2.5f)
             {
                 player.ChangeState(new IdleSate());
             }

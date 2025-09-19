@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 
@@ -25,9 +26,8 @@ public class Character : MonoBehaviour
     public void OnDespawn()
     {
         ChangeAnim("dead");
-        Destroy(gameObject);
     }
-    public void Attack()
+    public virtual void Attack()
     {
         ChangeAnim("attack");
     }
@@ -42,5 +42,13 @@ public class Character : MonoBehaviour
     public void Dance()
     {
         ChangeAnim("dance");
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            OnDespawn();
+        }
     }
 }

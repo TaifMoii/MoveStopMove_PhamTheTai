@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : GameUnit
 {
-    [SerializeField] Transform muzzle;
-    [SerializeField] ProjectilePool pool;
-
-    public void ShootAt(Transform enemy)
+    public float moveSpeed = 5f;
+    public void OnInit(Transform target)
     {
-        if (!enemy) return;
+        Vector3 lookPos = target.position - transform.position;
+        lookPos.y = 0; // bỏ chiều cao
+        transform.rotation = Quaternion.LookRotation(lookPos);
+        transform.DOMove(target.position, moveSpeed).SetSpeedBased();
 
-        Vector3 dir = (enemy.position - muzzle.position);
-        var proj = pool.Get(muzzle.position, Quaternion.identity);
-        proj.Init(dir);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            OnDespawn(0.1f);
+        }
     }
 }

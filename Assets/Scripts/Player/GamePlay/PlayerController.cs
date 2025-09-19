@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : Character
@@ -9,14 +11,16 @@ public class PlayerController : Character
     public float moveSpeed = 5f;
     public JoyStick joystick;
     public float attackRange;
+    public Transform Target => target;
 
     public LayerMask enemyLayer;
     public bool canAttack;
     public bool isMoving;
+
+    public Transform muzzle;
     private Rigidbody rb;
     private IState currentState;
     private Transform target;
-    public Transform Target => target;
 
 
 
@@ -103,5 +107,29 @@ public class PlayerController : Character
     public void ResetTarget()
     {
         target = null;
+    }
+    public override void Attack()
+    {
+        base.Attack();
+        Vector3 lookPos = target.position - transform.position;
+        lookPos.y = 0; // bỏ chiều cao
+        transform.rotation = Quaternion.LookRotation(lookPos);
+        StartCoroutine(WaitAttack());
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            OnDespawn();
+        }
+    }
+    IEnumerator WaitAttack()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+
+        var weapons = HBPool.Spawn<Weapon>(PoolType.Bullet, muzzle.position, Quaternion.identity);
+        weapons.OnInit(Target);
     }
 }
