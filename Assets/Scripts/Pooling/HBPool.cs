@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class HBPool 
+public static class HBPool
 {
     class Pool
     {
@@ -86,7 +86,7 @@ public static class HBPool
 
     public static T Spawn<T>(PoolType poolType, Vector3 pos, Quaternion rot) where T : GameUnit
     {
-         return poolInstance[poolType].Spawn(pos, rot) as T;
+        return poolInstance[poolType].Spawn(pos, rot) as T;
     }
 
     public static void Despawn(GameUnit gameUnit)

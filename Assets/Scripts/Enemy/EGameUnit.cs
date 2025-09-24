@@ -2,14 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackRangeCircle : MonoBehaviour
+public class EGameUnit : Character
 {
-
-
-    void Start()
-    {
-
-    }
-
 
 }

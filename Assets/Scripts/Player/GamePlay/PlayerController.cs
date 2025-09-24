@@ -5,14 +5,13 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+[RequireComponent(typeof(LineRenderer))]
 
 public class PlayerController : Character
 {
     public float moveSpeed = 5f;
     public JoyStick joystick;
-    public float attackRange;
     public Transform Target => target;
-
     public LayerMask enemyLayer;
     public bool canAttack;
     public bool isMoving;
@@ -26,12 +25,14 @@ public class PlayerController : Character
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         OnInit();
     }
 
     public override void OnInit()
     {
+        rb = GetComponent<Rigidbody>();
+
+
         base.OnInit();
         ChangeState(new IdleSate());
         isMoving = false;
@@ -115,21 +116,20 @@ public class PlayerController : Character
         lookPos.y = 0; // bỏ chiều cao
         transform.rotation = Quaternion.LookRotation(lookPos);
         StartCoroutine(WaitAttack());
-    }
 
-    void OnTriggerEnter(Collider other)
+    }
+    public override void OnDeath()
     {
-        if (other.CompareTag("Weapon"))
-        {
-            OnDespawn();
-        }
+        base.OnDeath();
+        ChangeState(new DeathState());
     }
     IEnumerator WaitAttack()
     {
         yield return new WaitForSeconds(0.3f);
 
-
         var weapons = HBPool.Spawn<Weapon>(PoolType.Bullet, muzzle.position, Quaternion.identity);
-        weapons.OnInit(Target);
+        weapons.OnInit(target, this);
+        weapons.DespawnWeapon();
     }
+
 }

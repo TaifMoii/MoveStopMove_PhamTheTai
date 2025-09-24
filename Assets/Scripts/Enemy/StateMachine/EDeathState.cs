@@ -2,23 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ERunState : EIState
+public class EDeathState : EIState
 {
     public void OnEnter(EnemyController enemy)
     {
-        enemy.Run();
     }
 
     public void OnExecute(EnemyController enemy)
     {
-        if (enemy.isMoving)
-        {
-            return;
-        }
-        else
-        {
-            enemy.ChangeState(new EIdleState());
-        }
 
     }
 

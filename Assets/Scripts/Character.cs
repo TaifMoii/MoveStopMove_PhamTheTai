@@ -3,16 +3,35 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     private string currentAnim;
+    public Transform skin;
+    public float attackRange;
+    public bool isDead;
+    public int segments = 100;   // độ mịn vòng tròn
+    public float radius = 5f;    // bán kính tấn công
+    public Color color = Color.white;
+
+    private LineRenderer line;
 
 
     public virtual void OnInit()
     {
         ChangeAnim("idle");
+        isDead = false;
+        line = GetComponent<LineRenderer>();
+        line.positionCount = segments + 1;
+        line.useWorldSpace = false;
+        line.loop = true;
+        line.widthMultiplier = 0.05f;
+        line.material = new Material(Shader.Find("Unlit/Color"));
+        line.material.color = color;
+
+        DrawCircle();
     }
     protected void ChangeAnim(string animName)
     {
@@ -23,7 +42,7 @@ public class Character : MonoBehaviour
             animator.SetTrigger(currentAnim);
         }
     }
-    public void OnDespawn()
+    public virtual void OnDespawn()
     {
         ChangeAnim("dead");
     }
@@ -31,24 +50,44 @@ public class Character : MonoBehaviour
     {
         ChangeAnim("attack");
     }
-    public void Run()
+    public virtual void Run()
     {
         ChangeAnim("run");
     }
-    public void Idle()
+    public virtual void Idle()
     {
         ChangeAnim("idle");
     }
-    public void Dance()
+    public virtual void Dance()
     {
         ChangeAnim("dance");
     }
 
-    void OnTriggerEnter(Collider other)
+    public void UpdateScore()
     {
-        if (other.CompareTag("Weapon"))
+        attackRange += 1;
+        radius += 1;
+
+        Grow();
+
+    }
+    void Grow()
+    {
+        skin.localScale += Vector3.one * 0.2f;
+    }
+    public virtual void OnDeath()
+    {
+        isDead = true;
+    }
+    public void DrawCircle()
+    {
+        float angle = 0f;
+        for (int i = 0; i <= segments; i++)
         {
-            OnDespawn();
+            float x = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
+            float z = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
+            line.SetPosition(i, new Vector3(x, 0, z));
+            angle += (360f / segments);
         }
     }
 }
