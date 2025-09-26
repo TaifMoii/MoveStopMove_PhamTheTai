@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UIElements;
 
-public class Character : MonoBehaviour
+public class Character : GameUnit
 {
     [SerializeField] private Animator animator;
     private string currentAnim;
@@ -78,6 +78,7 @@ public class Character : MonoBehaviour
     public virtual void OnDeath()
     {
         isDead = true;
+
     }
     public void DrawCircle()
     {

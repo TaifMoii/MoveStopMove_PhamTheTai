@@ -67,8 +67,6 @@ public class EnemyController : Character
 
             yield return null;
 
-        // nghỉ 1 chút rồi chọn điểm mới
-        yield return new WaitForSeconds(waitTime);
         isMoving = false;
     }
 
@@ -105,13 +103,12 @@ public class EnemyController : Character
         ChangeState(new EDeathState());
 
     }
-    IEnumerator WaitAttack()
+    IEnumerator WaitAttack(Transform enemy)
     {
         yield return new WaitForSeconds(0.3f);
 
-
         var weapons = HBPool.Spawn<Weapon>(PoolType.Bullet, muzzle.position, Quaternion.identity);
-        weapons.OnInit(Target, this);
+        weapons.OnInit(enemy.transform, this);
         weapons.DespawnWeapon();
     }
     public override void Attack()
@@ -121,12 +118,13 @@ public class EnemyController : Character
         lookPos.y = 0; // bỏ chiều cao
         transform.rotation = Quaternion.LookRotation(lookPos);
 
-        StartCoroutine(WaitAttack());
+        StartCoroutine(WaitAttack(target.transform));
 
     }
     public override void OnDespawn()
     {
         base.OnDespawn();
+        agent.isStopped = true;
         StartCoroutine(WaitDespawn());
     }
     IEnumerator WaitDespawn()

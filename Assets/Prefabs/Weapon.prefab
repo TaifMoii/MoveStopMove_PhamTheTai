@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 1
-  moveSpeed: 5
+  moveSpeed: 8
+  owner: {fileID: 0}
 --- !u!65 &2048305281304049476
 BoxCollider:
   m_ObjectHideFlags: 0

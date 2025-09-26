@@ -8,12 +8,18 @@ using UnityEngine;
 
 public class Weapon : GameUnit
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 7f;
     public Character owner;
 
     public void OnInit(Transform target, Character PlayerFire)
     {
         owner = PlayerFire;
+
+        if (target == null)
+        {
+            OnDespawn(0f);
+            return;
+        }
 
         Vector3 lookPos = target.position - transform.position;
         lookPos.y = 0; // bỏ chiều cao
@@ -28,7 +34,7 @@ public class Weapon : GameUnit
     IEnumerator WaitDespawn()
     {
         yield return new WaitForSeconds(1f);
-        OnDespawn(0.1f);
+        OnDespawn(0f);
 
     }
     void OnTriggerEnter(Collider other)
@@ -42,6 +48,7 @@ public class Weapon : GameUnit
             if (character != null)
             {
                 character.OnDeath();
+                other.GetComponent<Collider>().enabled = false;
             }
 
         }

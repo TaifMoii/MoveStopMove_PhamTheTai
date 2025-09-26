@@ -115,7 +115,8 @@ public class PlayerController : Character
         Vector3 lookPos = target.position - transform.position;
         lookPos.y = 0; // bỏ chiều cao
         transform.rotation = Quaternion.LookRotation(lookPos);
-        StartCoroutine(WaitAttack());
+
+        StartCoroutine(WaitAttack(target.transform));
 
     }
     public override void OnDeath()
@@ -123,12 +124,12 @@ public class PlayerController : Character
         base.OnDeath();
         ChangeState(new DeathState());
     }
-    IEnumerator WaitAttack()
+    IEnumerator WaitAttack(Transform enenmy)
     {
         yield return new WaitForSeconds(0.3f);
 
         var weapons = HBPool.Spawn<Weapon>(PoolType.Bullet, muzzle.position, Quaternion.identity);
-        weapons.OnInit(target, this);
+        weapons.OnInit(enenmy.transform, this);
         weapons.DespawnWeapon();
     }
 
