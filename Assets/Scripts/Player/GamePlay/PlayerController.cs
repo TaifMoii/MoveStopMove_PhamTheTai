@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+using Cinemachine;
+using Unity.VisualScripting;
 [RequireComponent(typeof(LineRenderer))]
 
 public class PlayerController : Character
@@ -17,6 +15,8 @@ public class PlayerController : Character
     public bool isMoving;
 
     public Transform muzzle;
+    public GameObject UILose;
+    public CooldownUI cooldownUI;
     private Rigidbody rb;
     private IState currentState;
     private Transform target;
@@ -25,31 +25,41 @@ public class PlayerController : Character
 
     void Start()
     {
-        OnInit();
+        OnInit(transform.position);
     }
 
-    public override void OnInit()
+    public override void OnInit(Vector3 des)
     {
         rb = GetComponent<Rigidbody>();
 
 
-        base.OnInit();
-        ChangeState(new IdleSate());
+        base.OnInit(des);
+        ChangeState(new MainMenuState());
         isMoving = false;
         canAttack = false;
     }
     void Update()
     {
+
         if (currentState != null)
         {
             currentState.OnExecute(this);
         }
     }
 
+    public void ChangeGamePLay()
+    {
+        ChangeState(new IdleSate());
+    }
 
 
     void FixedUpdate()
     {
+        if (isDead)
+        {
+            rb.freezeRotation = true;
+            return;
+        }
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
 
@@ -73,7 +83,6 @@ public class PlayerController : Character
         {
             isMoving = false;
         }
-
     }
 
     public void FindTarget()
@@ -123,6 +132,7 @@ public class PlayerController : Character
     {
         base.OnDeath();
         ChangeState(new DeathState());
+
     }
     IEnumerator WaitAttack(Transform enenmy)
     {
@@ -131,6 +141,14 @@ public class PlayerController : Character
         var weapons = HBPool.Spawn<Weapon>(PoolType.Bullet, muzzle.position, Quaternion.identity);
         weapons.OnInit(enenmy.transform, this);
         weapons.DespawnWeapon();
+    }
+    public void AddYOffset(CinemachineVirtualCamera vcam)
+    {
+        var transposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        if (transposer != null)
+        {
+            transposer.m_TrackedObjectOffset.y += 1f;   // cộng thêm 1 vào Y
+        }
     }
 
 }

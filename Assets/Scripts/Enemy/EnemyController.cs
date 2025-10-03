@@ -6,37 +6,46 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : Character
 {
-    private EIState currentState;
+    [SerializeField] private EIState currentState;
     private Transform target;
-    private NavMeshAgent agent;
-    Vector3 deadPoi;
+    public NavMeshAgent agent;
     public Transform muzzle;
-
+    public CapsuleCollider Ecollider;
     public bool isMoving;
+    public bool isMainMenu;
     public LayerMask enemyLayer;
 
     public Transform Target => target;
     public float waitTime = 2f;
 
-    void Start()
-    {
-        OnInit();
-    }
+
     void Update()
     {
+        if (isDead == true)
+        {
+            EReturnToPool();
+            return;
+        }
         if (currentState != null)
         {
             currentState.OnExecute(this);
         }
     }
-    public override void OnInit()
+    public override void OnInit(Vector3 des)
     {
-        base.OnInit();
+        base.OnInit(des);
         agent = GetComponent<NavMeshAgent>();
-        isMoving = false;
+        Ecollider.enabled = true;
+        agent.Warp(des);
         ResetTarget();
+        isMainMenu = false;
+        isMoving = false;
         isDead = false;
         ChangeState(new EIdleState());
+    }
+
+    public void EReturnToPool()
+    {
     }
     public void ChangeState(EIState state)
     {
@@ -99,9 +108,9 @@ public class EnemyController : Character
     public override void OnDeath()
     {
         base.OnDeath();
-        OnDespawn();
         ChangeState(new EDeathState());
-
+        Dead();
+        Level.Ins.enemySpawn--;
     }
     IEnumerator WaitAttack(Transform enemy)
     {
@@ -121,25 +130,17 @@ public class EnemyController : Character
         StartCoroutine(WaitAttack(target.transform));
 
     }
-    public override void OnDespawn()
+    public override void Dead()
     {
-        base.OnDespawn();
+        base.Dead();
         agent.isStopped = true;
-        StartCoroutine(WaitDespawn());
     }
-    IEnumerator WaitDespawn()
+    public void DespawnEnemy()
     {
-        yield return new WaitForSeconds(1.5f);
-        gameObject.SetActive(false);
+        OnDespawn(1f);
     }
 
-    public void WaitIdles()
-    {
-        StartCoroutine(WaitIdle());
-    }
-    IEnumerator WaitIdle()
-    {
-        yield return new WaitForSeconds(1f);
-    }
+
+
 }
 

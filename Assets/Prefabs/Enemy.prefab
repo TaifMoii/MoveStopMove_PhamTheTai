@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4218f2013707c48bd5a60322febeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
+  poolType: 21
   animator: {fileID: 4127286719445317925}
   skin: {fileID: 6326733558931854431}
   attackRange: 5
@@ -89,8 +89,12 @@ MonoBehaviour:
   segments: 100
   radius: 5
   color: {r: 1, g: 1, b: 1, a: 1}
+  isPlayer: 0
+  agent: {fileID: 3334255916229896992}
   muzzle: {fileID: 3084982501420632159}
+  Ecollider: {fileID: 3011470366278362085}
   isMoving: 0
+  isMainMenu: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 192

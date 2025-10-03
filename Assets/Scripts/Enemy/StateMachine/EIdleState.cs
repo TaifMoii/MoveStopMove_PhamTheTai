@@ -9,7 +9,6 @@ public class EIdleState : EIState
     public void OnEnter(EnemyController enemy)
     {
         enemy.Idle();
-        enemy.WaitIdles();
         timeDelay = 0f;
     }
 
@@ -17,18 +16,16 @@ public class EIdleState : EIState
     {
         timeDelay += Time.deltaTime;
         enemy.FindTarget();
-
         if (enemy.Target != null && !enemy.isMoving)
         {
             enemy.ChangeState(new EAttackState());
         }
-        if (timeDelay >= 2f)
+        if (timeDelay >= 2.5f)
         {
             if (enemy.Target == null && !enemy.isMoving)
             {
                 enemy.ChangeState(new ERunState());
             }
-
             timeDelay = 0;
         }
 

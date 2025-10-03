@@ -6,9 +6,8 @@ public class DeathState : IState
 {
     public void OnEnter(PlayerController player)
     {
-        Debug.Log("Dead");
-        player.OnDespawn();
-
+        player.isDead = true;
+        player.Dead();
     }
 
     public void OnExecute(PlayerController player)

@@ -22,8 +22,8 @@ public class PoolControler : MonoBehaviour
         for (int i = 0; i < PoolNoneRoot.Count; i++)
         {
             HBPool.Preload(PoolNoneRoot[i], 0, transform);
-        }       
-        
+        }
+
         for (int i = 0; i < PoolWithRoot.Count; i++)
         {
             HBPool.Preload(PoolWithRoot[i].prefab, PoolWithRoot[i].amount, PoolWithRoot[i].root);
@@ -45,7 +45,7 @@ public class PoolAmount
     public GameUnit prefab;
     public int amount;
 
-    public PoolAmount (Transform root, GameUnit prefab, int amount)
+    public PoolAmount(Transform root, GameUnit prefab, int amount)
     {
         this.root = root;
         this.prefab = prefab;
@@ -72,11 +72,12 @@ public enum ParticleType
 
 public enum PoolType
 {
-    None = 0,
 
+    None = 0,
     Bullet = 1,
     DashShadow = 2,
     HpText = 20,
+    Enemy,
 }
 
 

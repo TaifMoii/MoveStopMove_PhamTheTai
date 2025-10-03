@@ -23,10 +23,10 @@ public class GameUnit : MonoBehaviour
 
     public void OnDespawn(float delay)
     {
-        Invoke(nameof(OnDespawn), delay);
+        Invoke(nameof(DeSpawn), delay);
     }
 
-    private void OnDespawn()
+    private void DeSpawn()
     {
         HBPool.Despawn(this);
     }

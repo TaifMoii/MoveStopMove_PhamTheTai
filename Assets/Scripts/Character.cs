@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Android;
-using UnityEngine.UIElements;
+
 
 public class Character : GameUnit
 {
@@ -15,11 +11,11 @@ public class Character : GameUnit
     public int segments = 100;   // độ mịn vòng tròn
     public float radius = 5f;    // bán kính tấn công
     public Color color = Color.white;
-
+    public bool isPlayer;
     private LineRenderer line;
 
 
-    public virtual void OnInit()
+    public virtual void OnInit(Vector3 des)
     {
         ChangeAnim("idle");
         isDead = false;
@@ -31,7 +27,9 @@ public class Character : GameUnit
         line.material = new Material(Shader.Find("Unlit/Color"));
         line.material.color = color;
 
+
         DrawCircle();
+
     }
     protected void ChangeAnim(string animName)
     {
@@ -42,7 +40,7 @@ public class Character : GameUnit
             animator.SetTrigger(currentAnim);
         }
     }
-    public virtual void OnDespawn()
+    public virtual void Dead()
     {
         ChangeAnim("dead");
     }
@@ -67,7 +65,8 @@ public class Character : GameUnit
     {
         attackRange += 1;
         radius += 1;
-
+        // Level.Ins.UpdateEnemy();
+        UIGamePlay.Ins.UpdateEnemy();
         Grow();
 
     }
@@ -77,8 +76,6 @@ public class Character : GameUnit
     }
     public virtual void OnDeath()
     {
-        isDead = true;
-
     }
     public void DrawCircle()
     {

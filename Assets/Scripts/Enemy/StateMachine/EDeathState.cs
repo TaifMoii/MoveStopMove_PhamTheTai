@@ -6,6 +6,8 @@ public class EDeathState : EIState
 {
     public void OnEnter(EnemyController enemy)
     {
+        enemy.isDead = true;
+        enemy.DespawnEnemy();
     }
 
     public void OnExecute(EnemyController enemy)

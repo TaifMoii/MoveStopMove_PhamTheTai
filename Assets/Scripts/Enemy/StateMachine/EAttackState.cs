@@ -32,6 +32,7 @@ public class EAttackState : EIState
             }
         }
 
+
     }
 
     public void OnExit(EnemyController enemy)

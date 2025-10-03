@@ -1,15 +1,11 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
-
 public class Weapon : GameUnit
 {
     public float moveSpeed = 7f;
     public Character owner;
+
 
     public void OnInit(Transform target, Character PlayerFire)
     {
@@ -50,7 +46,7 @@ public class Weapon : GameUnit
                 character.OnDeath();
                 other.GetComponent<Collider>().enabled = false;
             }
-
+            Level.Ins.UpdateEnemy();
         }
     }
 
