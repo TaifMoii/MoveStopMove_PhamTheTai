@@ -12,6 +12,7 @@ public class Character : GameUnit
     public float radius = 5f;    // bán kính tấn công
     public Color color = Color.white;
     public bool isPlayer;
+    private int score;
     private LineRenderer line;
 
 
@@ -63,10 +64,13 @@ public class Character : GameUnit
 
     public void UpdateScore()
     {
-        attackRange += 1;
-        radius += 1;
-        // Level.Ins.UpdateEnemy();
-        UIGamePlay.Ins.UpdateEnemy();
+        score++;
+        if (score % 2 == 0 && score <= 10)
+        {
+            attackRange += 1;
+            radius += 1;
+        }
+        Level.Ins.UpdateEnemy();
         Grow();
 
     }

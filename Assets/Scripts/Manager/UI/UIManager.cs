@@ -23,7 +23,7 @@ public class UIManager : Singleton<UIManager>
 {
     //list from resource
     //list load ui resource
-    [SerializeField] private UICanvas[] uiResources;
+    private UICanvas[] uiResources;
 
     //dict for quick query UI prefab
     //dict dung de lu thong tin prefab canvas truy cap cho nhanh
@@ -118,11 +118,7 @@ public class UIManager : Singleton<UIManager>
     {
         if (!uiCanvasPrefab.ContainsKey(typeof(T)))
         {
-            //if (uiResources == null)
-            //{
-            //    uiResources = Resources.LoadAll<UICanvas>("UI/");
-            //}
-
+            uiResources ??= Resources.LoadAll<UICanvas>("UI/");
             for (int i = 0; i < uiResources.Length; i++)
             {
                 if (uiResources[i] is T)

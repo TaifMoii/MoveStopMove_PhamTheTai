@@ -6,22 +6,20 @@ public class ChangeCamera : MonoBehaviour
 {
     public GameObject MainMenuCam;
     public GameObject GamePlayCam;
-    public GameObject GamePlayUI;
-    public GameObject MainMenuUI;
     void Awake()
     {
         MainMenuCam.SetActive(true);
         GamePlayCam.SetActive(false);
-        GamePlayUI.SetActive(false);
-        MainMenuUI.SetActive(true);
-
     }
-    public void ChangeCam()
+    public void ChangeCamPlay()
     {
         MainMenuCam.SetActive(false);
         GamePlayCam.SetActive(true);
-        GamePlayUI.SetActive(true);
-        MainMenuUI.SetActive(false);
+    }
+    public void ChangeCamMenu()
+    {
+        MainMenuCam.SetActive(true);
+        GamePlayCam.SetActive(false);
     }
 
 }

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIGamePlay : Singleton<UIGamePlay>
+public class UIGamePlay : UICanvas
 {
     public TextMeshProUGUI enemyLiveText;
 
-    public void UpdateEnemy()
+    public void Update()
     {
         enemyLiveText.text = Level.Ins.maxEnemy.ToString();
     }
     void Start()
     {
-        enemyLiveText.text = Level.Ins.maxEnemy.ToString();
-
+        enemyLiveText.text = Level.Ins.maxEnemy.ToString() + 1;
     }
+
+
 }

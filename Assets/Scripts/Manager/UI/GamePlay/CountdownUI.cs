@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class CooldownUI : MonoBehaviour
+public class CooldownUI : Singleton<CooldownUI>
 {
     public TextMeshProUGUI text;   // gán Text UI vào đây
 
@@ -25,8 +25,11 @@ public class CooldownUI : MonoBehaviour
             yield return null;
             t -= Time.deltaTime;
         }
-
         // về 0
         text.text = "0";
+        if (t == 0)
+        {
+            GameManager.Ins.OpenMainMenu();
+        }
     }
 }

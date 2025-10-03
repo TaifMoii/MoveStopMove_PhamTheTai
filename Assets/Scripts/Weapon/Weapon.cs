@@ -46,7 +46,6 @@ public class Weapon : GameUnit
                 character.OnDeath();
                 other.GetComponent<Collider>().enabled = false;
             }
-            Level.Ins.UpdateEnemy();
         }
     }
 

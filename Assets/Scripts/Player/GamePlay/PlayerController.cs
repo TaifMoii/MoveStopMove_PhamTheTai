@@ -15,9 +15,7 @@ public class PlayerController : Character
     public bool isMoving;
 
     public Transform muzzle;
-    public GameObject UILose;
-    public CooldownUI cooldownUI;
-    private Rigidbody rb;
+    public Rigidbody rb;
     private IState currentState;
     private Transform target;
 
@@ -31,8 +29,6 @@ public class PlayerController : Character
     public override void OnInit(Vector3 des)
     {
         rb = GetComponent<Rigidbody>();
-
-
         base.OnInit(des);
         ChangeState(new MainMenuState());
         isMoving = false;
@@ -40,13 +36,16 @@ public class PlayerController : Character
     }
     void Update()
     {
-
         if (currentState != null)
         {
             currentState.OnExecute(this);
         }
     }
 
+    public void BackMainMenu()
+    {
+        OnInit(transform.position);
+    }
     public void ChangeGamePLay()
     {
         ChangeState(new IdleSate());
@@ -57,7 +56,6 @@ public class PlayerController : Character
     {
         if (isDead)
         {
-            rb.freezeRotation = true;
             return;
         }
         float horizontal = joystick.Horizontal;
@@ -132,7 +130,6 @@ public class PlayerController : Character
     {
         base.OnDeath();
         ChangeState(new DeathState());
-
     }
     IEnumerator WaitAttack(Transform enenmy)
     {

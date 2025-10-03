@@ -8,6 +8,9 @@ public class DeathState : IState
     {
         player.isDead = true;
         player.Dead();
+        GameManager.Ins.OpenUILose();
+        CooldownUI.Ins.StartCooldown(5);
+
     }
 
     public void OnExecute(PlayerController player)

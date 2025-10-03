@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public enum GameState { MainMenu, GamePlay, Finish, Revive, Setting }
@@ -7,6 +8,7 @@ public enum GameState { MainMenu, GamePlay, Finish, Revive, Setting }
 public class GameManager : Singleton<GameManager>
 {
     private static GameState gameState;
+    public Canvas joyStick;
 
     public static void ChangeState(GameState state)
     {
@@ -35,6 +37,46 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        // UIManager.Ins.OpenUI<UIMainMenu>();
+        OpenMainMenu();
+    }
+    public void OpenMainMenu()
+    {
+        UIManager.Ins.CloseAll();
+        joyStick.gameObject.SetActive(false);
+        UIManager.Ins.OpenUI<UIMainMenu>();
+        gameState = GameState.MainMenu;
+        Level.Ins.MainMenu();
+    }
+    public void OpenGamePlay()
+    {
+        UIManager.Ins.CloseAll();
+        joyStick.gameObject.SetActive(true);
+        UIManager.Ins.OpenUI<UIGamePlay>();
+        gameState = GameState.GamePlay;
+        Level.Ins.StartGame();
+
+    }
+    public void OpenRevive()
+    {
+        UIManager.Ins.OpenUI<UILose>();
+        gameState = GameState.Revive;
+    }
+    public void OpenSkinShop()
+    {
+        UIManager.Ins.CloseAll();
+        UIManager.Ins.OpenUI<UIShopSkin>();
+    }
+    public void OpenWeaponShop()
+    {
+        UIManager.Ins.CloseAll();
+        UIManager.Ins.OpenUI<UIShopWeapon>();
+    }
+    public void OpenUILose()
+    {
+        UIManager.Ins.OpenUI<UILose>();
+    }
+    public void OpenUIWin()
+    {
+        UIManager.Ins.OpenUI<UIWin>();
     }
 }
