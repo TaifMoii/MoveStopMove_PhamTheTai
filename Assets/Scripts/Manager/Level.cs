@@ -15,7 +15,7 @@ public class Level : Singleton<Level>
 
     public PlayerController player;
     public ChangeCamera changeCamera;
-    List<EnemyController> enemies = new List<EnemyController>();
+    [SerializeField] private List<EnemyController> enemies = new List<EnemyController>();
     public void SpawnEnemy()
     {
         Vector3 destination = NavMeshUtils.GetRandomPointOnNavMesh();
@@ -25,6 +25,18 @@ public class Level : Singleton<Level>
         enemySpawn++;
     }
 
+    public void Lose()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i].isDead == false)
+            {
+                enemies[i].MainMenu();
+            }
+        }
+        GameManager.Ins.OpenMainMenu();
+        ResetGame();
+    }
     public void OnInit()
     {
         maxEnemyIndex = maxEnemy;
@@ -32,8 +44,17 @@ public class Level : Singleton<Level>
     }
     public void ResetGame()
     {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].DespawnEnemy();
+            }
+        }
         maxEnemy = maxEnemyIndex;
         maxEnemySpawn = maxEnemySpawnIndex;
+        enemySpawn = 0;
+        player.ResetScore();
     }
 
     public void StartGame()
@@ -44,6 +65,7 @@ public class Level : Singleton<Level>
         }
         player.ChangeGamePLay();
         changeCamera.ChangeCamPlay();
+        OnInit();
     }
     public void UpdateEnemy()
     {
@@ -66,6 +88,6 @@ public class Level : Singleton<Level>
     {
         player.OnInit(player.transform.position);
         changeCamera.ChangeCamMenu();
-        ResetGame();
     }
+
 }

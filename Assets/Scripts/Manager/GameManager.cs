@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using System.IO;
 
 public enum GameState { MainMenu, GamePlay, Finish, Revive, Setting }
 
@@ -9,6 +10,7 @@ public class GameManager : Singleton<GameManager>
 {
     private static GameState gameState;
     public Canvas joyStick;
+    public PlayerData playerData;
 
     public static void ChangeState(GameState state)
     {
@@ -33,6 +35,10 @@ public class GameManager : Singleton<GameManager>
         {
             Screen.SetResolution(Mathf.RoundToInt(ratio * (float)maxScreenHeight), maxScreenHeight, true);
         }
+
+        playerData = new PlayerData();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -51,15 +57,16 @@ public class GameManager : Singleton<GameManager>
     {
         UIManager.Ins.CloseAll();
         joyStick.gameObject.SetActive(true);
+        Level.Ins.StartGame();
         UIManager.Ins.OpenUI<UIGamePlay>();
         gameState = GameState.GamePlay;
-        Level.Ins.StartGame();
 
     }
     public void OpenRevive()
     {
         UIManager.Ins.OpenUI<UILose>();
         gameState = GameState.Revive;
+
     }
     public void OpenSkinShop()
     {
@@ -78,5 +85,42 @@ public class GameManager : Singleton<GameManager>
     public void OpenUIWin()
     {
         UIManager.Ins.OpenUI<UIWin>();
+    }
+    public void OpenShop()
+    {
+        UIManager.Ins.OpenUI<UIShop>();
+    }
+    public void OpenInventSkin()
+    {
+        UIManager.Ins.CloseAll();
+        UIManager.Ins.OpenUI<InventSkin>();
+    }
+    public void OpenInventWeapon()
+    {
+        UIManager.Ins.CloseAll();
+        UIManager.Ins.OpenUI<InventWeapon>();
+    }
+    public void LoadPlayerData()
+    {
+        string path = Application.persistentDataPath + "/playerdata.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            GameManager.Ins.playerData = JsonUtility.FromJson<PlayerData>(json);
+        }
+    }
+    public void SavePlayerData()
+    {
+        string path = Application.persistentDataPath + "/playerdata.json";
+        string json = JsonUtility.ToJson(GameManager.Ins.playerData);
+        File.WriteAllText(path, json);
+    }
+    public void Delete()
+    {
+        string path = Application.persistentDataPath + "/playerdata.json";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
     }
 }

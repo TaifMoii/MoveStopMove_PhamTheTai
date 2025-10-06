@@ -27,9 +27,9 @@ public class CooldownUI : Singleton<CooldownUI>
         }
         // về 0
         text.text = "0";
-        if (t == 0)
+        if (t <= 0.1f)
         {
-            GameManager.Ins.OpenMainMenu();
+            Level.Ins.Lose();
         }
     }
 }

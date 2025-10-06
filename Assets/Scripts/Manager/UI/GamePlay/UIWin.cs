@@ -17,6 +17,6 @@ public class UIWin : UICanvas
     public void BackMainMenu()
     {
         GameManager.Ins.OpenMainMenu();
-
+        Level.Ins.ResetGame();
     }
 }

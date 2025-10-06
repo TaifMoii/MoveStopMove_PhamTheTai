@@ -23,7 +23,6 @@ public class EnemyController : Character
     {
         if (isDead == true)
         {
-            EReturnToPool();
             return;
         }
         if (currentState != null)
@@ -42,10 +41,6 @@ public class EnemyController : Character
         isMoving = false;
         isDead = false;
         ChangeState(new EIdleState());
-    }
-
-    public void EReturnToPool()
-    {
     }
     public void ChangeState(EIState state)
     {
@@ -78,7 +73,14 @@ public class EnemyController : Character
 
         isMoving = false;
     }
-
+    public void MainMenu()
+    {
+        agent.isStopped = true;
+        isMainMenu = true;
+        isMoving = false;
+        Ecollider.enabled = false;
+        ChangeState(new EMainMenuState());
+    }
     public void FindTarget()
     {
         // Lấy tất cả Collider trong bán kính attackRange

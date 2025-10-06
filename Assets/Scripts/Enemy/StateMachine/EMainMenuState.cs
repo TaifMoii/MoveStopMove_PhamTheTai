@@ -6,7 +6,6 @@ public class EMainMenuState : EIState
 {
     public void OnEnter(EnemyController enemy)
     {
-        enemy.isMainMenu = true;
         enemy.Dance();
     }
 

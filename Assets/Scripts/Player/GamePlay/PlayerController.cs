@@ -56,11 +56,11 @@ public class PlayerController : Character
     {
         if (isDead)
         {
+            rb.velocity = Vector3.zero;
             return;
         }
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
-
         Vector3 direction = new Vector3(horizontal, 0, vertical);
 
         // Di chuyển

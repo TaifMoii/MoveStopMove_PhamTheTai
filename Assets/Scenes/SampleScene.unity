@@ -467,6 +467,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joyStick: {fileID: 1095249677}
+  playerData:
+    Coin: 0
+    Weapons: []
+    Skins: []
 --- !u!1 &360366408
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +531,10 @@ PrefabInstance:
     - target: {fileID: 7860217861062076013, guid: 0c572bd095b481149b6d273f47fdf957, type: 3}
       propertyPath: m_Name
       value: Canvas - Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860217861062076013, guid: 0c572bd095b481149b6d273f47fdf957, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8119588131190854580, guid: 0c572bd095b481149b6d273f47fdf957, type: 3}
       propertyPath: m_Pivot.x
@@ -1246,11 +1254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46033c59fb9044746a9cbefd3ea275ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemy: 2
+  maxEnemy: 20
   enemySpawn: 0
-  maxEnemySpawn: 1
+  maxEnemySpawn: 10
   player: {fileID: 160550426}
   changeCamera: {fileID: 963194231}
+  enemies: []
 --- !u!4 &1134154443
 Transform:
   m_ObjectHideFlags: 0
