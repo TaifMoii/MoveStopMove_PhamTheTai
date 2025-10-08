@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "DataSkin", menuName = "ScriptableObjects/Skin", order = 1)]
+[CreateAssetMenu(fileName = "DataSkinSO", menuName = "ScriptableObjects/Skin", order = 1)]
 
 public class DataSkinSO : ScriptableObject
 {
@@ -10,8 +10,9 @@ public class DataSkinSO : ScriptableObject
 [System.Serializable]
 public class DataSkin
 {
-    public string skinName;
     public int index;
+
+    public string skinName;
     public Sprite icon;
     public int price;
     public bool isEquipped = false;

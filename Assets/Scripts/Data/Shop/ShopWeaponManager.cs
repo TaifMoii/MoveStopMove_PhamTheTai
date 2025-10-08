@@ -15,4 +15,5 @@ public class ShopWeaponManager : MonoBehaviour
             newItem.WeaponInit(weapon);
         }
     }
+
 }

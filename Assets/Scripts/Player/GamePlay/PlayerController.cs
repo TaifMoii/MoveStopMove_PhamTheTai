@@ -18,6 +18,7 @@ public class PlayerController : Character
     public Rigidbody rb;
     private IState currentState;
     private Transform target;
+    CameraFollow cameraFollow;
 
 
 
@@ -28,6 +29,7 @@ public class PlayerController : Character
 
     public override void OnInit(Vector3 des)
     {
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         rb = GetComponent<Rigidbody>();
         base.OnInit(des);
         ChangeState(new MainMenuState());

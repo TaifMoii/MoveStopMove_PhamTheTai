@@ -55,6 +55,8 @@ public class Level : Singleton<Level>
         maxEnemySpawn = maxEnemySpawnIndex;
         enemySpawn = 0;
         player.ResetScore();
+        player.BackMainMenu();
+        CameraFollow.Ins.ChangeCamera(CameraState.MainMenu);
     }
 
     public void StartGame()
@@ -64,8 +66,8 @@ public class Level : Singleton<Level>
             SpawnEnemy();
         }
         player.ChangeGamePLay();
-        changeCamera.ChangeCamPlay();
         OnInit();
+        CameraFollow.Ins.ChangeCamera(CameraState.GamePlay);
     }
     public void UpdateEnemy()
     {
@@ -83,11 +85,6 @@ public class Level : Singleton<Level>
         {
             GameManager.Ins.OpenUIWin();
         }
-    }
-    public void MainMenu()
-    {
-        player.OnInit(player.transform.position);
-        changeCamera.ChangeCamMenu();
     }
 
 }

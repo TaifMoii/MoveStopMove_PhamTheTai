@@ -29,6 +29,7 @@ public class Character : GameUnit
         line.widthMultiplier = 0.05f;
         line.material = new Material(Shader.Find("Unlit/Color"));
         line.material.color = color;
+        score = 0;
 
         skin.localScale = Vector3.one * scaleDefault;
         DrawCircle();
@@ -69,11 +70,15 @@ public class Character : GameUnit
         score++;
         if (score % 2 == 0 && score <= 10)
         {
-            attackRange = Mathf.Clamp(attackRange + 1, 0, 5);
-            radius = Mathf.Clamp(radius + 1, 0, 5);
+            if (isPlayer)
+            {
+                CameraFollow.Ins.UpdateCamera();
+            }
+            attackRange = Mathf.Clamp(attackRange + 1, 0, 10);
+            radius = Mathf.Clamp(radius + 1, 0, 10);
+            Grow();
         }
         Level.Ins.UpdateEnemy();
-        Grow();
     }
     public void ResetScore()
     {

@@ -37,6 +37,7 @@ public class Weapon : GameUnit
     {
         if (other.CompareTag("Player"))
         {
+
             OnDespawn(0.1f);
             owner.UpdateScore();
             owner.DrawCircle();
@@ -45,6 +46,8 @@ public class Weapon : GameUnit
             {
                 character.OnDeath();
                 other.GetComponent<Collider>().enabled = false;
+
+
             }
         }
     }

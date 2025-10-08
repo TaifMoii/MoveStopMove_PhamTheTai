@@ -10,10 +10,7 @@ public class UIMainMenu : UICanvas
     [SerializeField] private Button buttonPlay;
     [SerializeField] private Button buttonShopWeapon;
     [SerializeField] private Button buttonShopSkin;
-    [SerializeField] private Button buttonShop;
 
-    [SerializeField] private Button buttonInventSkin;
-    [SerializeField] private Button buttonInventWeapon;
 
 
     public TextMeshProUGUI coinText;
@@ -23,16 +20,14 @@ public class UIMainMenu : UICanvas
     void Awake()
     {
         buttonPlay.onClick.AddListener(ButtonPlayClick);
-        buttonShop.onClick.AddListener(ButtonShopClick);
-        buttonInventSkin.onClick.AddListener(ButtonInventSkinClick);
-        buttonInventWeapon.onClick.AddListener(ButtonInventWeaponClick);
+        buttonShopSkin.onClick.AddListener(ButtonShopSkinClick);
+        buttonShopWeapon.onClick.AddListener(ButtonShopWeaponClick);
     }
     void OnDestroy()
     {
         buttonPlay.onClick.RemoveListener(ButtonPlayClick);
-        buttonShop.onClick.RemoveListener(ButtonShopClick);
-        buttonInventSkin.onClick.RemoveListener(ButtonInventSkinClick);
-        buttonInventWeapon.onClick.RemoveListener(ButtonInventWeaponClick);
+        buttonShopSkin.onClick.RemoveListener(ButtonShopSkinClick);
+        buttonShopWeapon.onClick.RemoveListener(ButtonShopWeaponClick);
     }
     public void Update()
     {
@@ -43,16 +38,13 @@ public class UIMainMenu : UICanvas
     {
         GameManager.Ins.OpenGamePlay();
     }
-    public void ButtonShopClick()
+
+    public void ButtonShopSkinClick()
     {
-        GameManager.Ins.OpenShop();
+        GameManager.Ins.OpenSkinShop();
     }
-    public void ButtonInventSkinClick()
+    public void ButtonShopWeaponClick()
     {
-        GameManager.Ins.OpenInventSkin();
-    }
-    public void ButtonInventWeaponClick()
-    {
-        GameManager.Ins.OpenInventWeapon();
+        GameManager.Ins.OpenWeaponShop();
     }
 }

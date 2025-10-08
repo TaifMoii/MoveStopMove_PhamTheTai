@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "DataWeapon", menuName = "ScriptableObjects/Weapon", order = 1)]
+[CreateAssetMenu(fileName = "DataWeaponSO", menuName = "ScriptableObjects/Weapon", order = 1)]
 public class DataWeaponSO : ScriptableObject
 {
     public List<DataWeapon> weapons = new List<DataWeapon>();
@@ -10,8 +10,8 @@ public class DataWeaponSO : ScriptableObject
 [System.Serializable]
 public class DataWeapon
 {
-    public string weaponName;
     public int index;
+    public string weaponName;
     public Sprite icon;
     public int price;
     public bool isEquipped = false;

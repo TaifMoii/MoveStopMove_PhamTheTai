@@ -51,7 +51,6 @@ public class GameManager : Singleton<GameManager>
         joyStick.gameObject.SetActive(false);
         UIManager.Ins.OpenUI<UIMainMenu>();
         gameState = GameState.MainMenu;
-        Level.Ins.MainMenu();
     }
     public void OpenGamePlay()
     {
@@ -70,12 +69,12 @@ public class GameManager : Singleton<GameManager>
     }
     public void OpenSkinShop()
     {
-        UIManager.Ins.CloseAll();
+        CameraFollow.Ins.ChangeCamera(CameraState.Shop);
         UIManager.Ins.OpenUI<UIShopSkin>();
     }
     public void OpenWeaponShop()
     {
-        UIManager.Ins.CloseAll();
+        CameraFollow.Ins.ChangeCamera(CameraState.Shop);
         UIManager.Ins.OpenUI<UIShopWeapon>();
     }
     public void OpenUILose()
@@ -90,16 +89,7 @@ public class GameManager : Singleton<GameManager>
     {
         UIManager.Ins.OpenUI<UIShop>();
     }
-    public void OpenInventSkin()
-    {
-        UIManager.Ins.CloseAll();
-        UIManager.Ins.OpenUI<InventSkin>();
-    }
-    public void OpenInventWeapon()
-    {
-        UIManager.Ins.CloseAll();
-        UIManager.Ins.OpenUI<InventWeapon>();
-    }
+
     public void LoadPlayerData()
     {
         string path = Application.persistentDataPath + "/playerdata.json";
