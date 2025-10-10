@@ -89,8 +89,8 @@ GameObject:
   - component: {fileID: 184602163705675983}
   - component: {fileID: 3498737220444032694}
   - component: {fileID: 9171407126461636975}
-  - component: {fileID: 3990836631952003105}
-  - component: {fileID: 8651189966750287111}
+  - component: {fileID: 8550559776513714281}
+  - component: {fileID: 5196409239733417069}
   m_Layer: 5
   m_Name: UIShopWeapon
   m_TagString: Untagged
@@ -181,22 +181,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3990836631952003105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695960777360361887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88998cd73a059f4f9cd44f2a66fdcc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 55ba17d7977326f4e9b7f5f7c70f3589, type: 2}
-  weaponPrefab: {fileID: 2797001794370744066, guid: c67af879d28613d409058aa915e6b96c, type: 3}
-  content: {fileID: 2021688221427970476}
---- !u!114 &8651189966750287111
+--- !u!114 &8550559776513714281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,6 +198,21 @@ MonoBehaviour:
   IsWidescreenProcessing: 0
   popups: []
   backMainMenu: {fileID: 2172004643428787457}
+--- !u!114 &5196409239733417069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695960777360361887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7238a7d1b7f39cb48948299970ef0cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 55ba17d7977326f4e9b7f5f7c70f3589, type: 2}
+  weaponPrefab: {fileID: 2797001794370744066, guid: 052a84f8dd710da4abce1e33e5eb8647, type: 3}
+  content: {fileID: 2021688221427970476}
 --- !u!1 &1945962794146898082
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 70
     m_Right: 0
     m_Top: 0
     m_Bottom: 0

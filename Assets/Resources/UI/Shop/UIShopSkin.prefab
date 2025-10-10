@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2371541455193939902}
   - component: {fileID: 8746737250241483060}
   - component: {fileID: 3680514215707063966}
-  - component: {fileID: 4416105239948182909}
+  - component: {fileID: -4510940403391172653}
   m_Layer: 5
   m_Name: UIShopSkin
   m_TagString: Untagged
@@ -121,7 +121,7 @@ MonoBehaviour:
   IsWidescreenProcessing: 0
   popups: []
   backMainMenu: {fileID: 2241586494437744764}
---- !u!114 &4416105239948182909
+--- !u!114 &-4510940403391172653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +130,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2635145151622466990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2bbf48c34e4014083919af8da645cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 64d7b3db0bf7d00438150651962619eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skins: []
   skinData: {fileID: 11400000, guid: 39b0de9a683e0124799fa833ba67ad7e, type: 2}
   skinPrefab: {fileID: 2797001794370744066, guid: c67af879d28613d409058aa915e6b96c, type: 3}
   content: {fileID: 8821745112416294011}

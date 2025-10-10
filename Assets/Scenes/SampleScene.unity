@@ -468,9 +468,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joyStick: {fileID: 1095249677}
   playerData:
+    skinData: {fileID: 0}
+    weaponData: {fileID: 0}
     Coin: 0
-    Weapons: []
-    Skins: []
 --- !u!1 &360366408
 GameObject:
   m_ObjectHideFlags: 0

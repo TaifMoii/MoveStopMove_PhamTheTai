@@ -4,68 +4,53 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public int Coin = 500;
+    [SerializeField] DataSkinSO skinData;
+    [SerializeField] DataWeaponSO weaponData;
+    public int Coin;
+    // todo : list<int>QA va weapon da mua
+    // bien int la nhung thu dang mac
+    // check neu id cua do co trong list thi la da mua roi
+    // neu khong co thi chua mua
+
+    //neu mua thi add vao list
+    //neu muon mac thi add id do vao bien int
+    // neu muon doi thi thay id do bang id khac
+
+    //neu chua mua thi khong the mac
+    //neu mua roi thi co the mac
+    //neu muon mac thi phai check xem da co cai khac dang mac chua
 
 
-    public List<DataWeapon> Weapons;
-    public List<DataSkin> Skins;
+    // check neu id bang id do dang mac thi la dang mac
+    // neu khong bang thi la khong mac
+    public List<int> purchasedSkins = new List<int>();
+    public List<int> purchasedWeapons = new List<int>();
+
     public void Init()
     {
-        Weapons = new List<DataWeapon>();
-        Skins = new List<DataSkin>();
-    }
-    public void AddWeapon(DataWeapon weapon)
-    {
-        if (!Weapons.Contains(weapon))
-        {
-            Weapons.Add(weapon);
-        }
-    }
-    public void AddSkin(DataSkin skin)
-    {
-        if (!Skins.Contains(skin))
-        {
-            Skins.Add(skin);
-
-        }
-    }
-}
-public class PlayerDataWrapper
-{
-    private static PlayerData playerData;
-    private const string PlayerDataKey = "PlayerData";
-    //chuyen doi tuong PlayerData sang dang json va luu vao PlayerPrefs
-    static PlayerDataWrapper()
-    {
-        playerData = JsonUtility.FromJson<PlayerData>(PlayerPrefs.GetString(PlayerDataKey));
-
-        //neu chua co du lieu thi khoi tao du lieu mac dinh
-        if (playerData == null)
-        {
-            var defaultWeapon = 0;
-            var defaultSkin = 0;
-            playerData = new PlayerData
-            {
-                Weapons = new List<DataWeapon> { playerData.Weapons[defaultWeapon] },
-                Skins = new List<DataSkin> { playerData.Skins[defaultSkin] }
-            };
-            SavePlayerData();
-        }
-    }
-    static void SavePlayerData()
-    {
-        var json = JsonUtility.ToJson(playerData);
-        PlayerPrefs.SetString(PlayerDataKey, json);
+        Coin = 1000; //khoi tao so coin ban dau
     }
 
-    public static void AddWeapon(DataWeapon weapon)
+    public DataSkin GetDataSkin(int index)
     {
-        playerData.AddWeapon(weapon);
-        SavePlayerData();
+        DataSkin found = skinData.skins.Find(skin => skin.index == index);
+
+        if (found == null)
+        {
+            Debug.LogWarning("Skin with index " + index + " not found.");
+            found = skinData.skins[0]; // Hoặc xử lý khác nếu không tìm thấy
+        }
+        return found;
     }
-    public static void AddSkin(DataSkin skin)
+    public DataWeapon GetDataWeapon(int index)
     {
-        playerData.AddSkin(skin);
-        SavePlayerData();
+        DataWeapon found = weaponData.weapons.Find(weapon => weapon.index == index);
+
+        if (found == null)
+        {
+            Debug.LogWarning("Weapon with index " + index + " not found.");
+            found = weaponData.weapons[0]; // Hoặc xử lý khác nếu không tìm thấy
+        }
+        return found;
     }
 }

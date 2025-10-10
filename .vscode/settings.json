@@ -51,5 +51,8 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "MoveIO_PhamTheTai.sln"
+    "dotnet.defaultSolution": "MoveIO_PhamTheTai.sln",
+    "cSpell.words": [
+        "interactable"
+    ]
 }
