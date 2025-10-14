@@ -468,9 +468,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joyStick: {fileID: 1095249677}
   playerData:
-    skinData: {fileID: 0}
-    weaponData: {fileID: 0}
-    Coin: 0
+    skinData: {fileID: 11400000, guid: 39b0de9a683e0124799fa833ba67ad7e, type: 2}
+    weaponData: {fileID: 11400000, guid: 55ba17d7977326f4e9b7f5f7c70f3589, type: 2}
+    Coin: 100
+    material: {fileID: 1130288043}
+    purchasedSkins: 
+    purchasedWeapons: 
+    materialsLists:
+    - {fileID: 2100000, guid: 352382a41fc4b584b8813a7b51636ed1, type: 2}
+    - {fileID: 2100000, guid: 8c12282e98695b9458577a917bc634e0, type: 2}
+    - {fileID: 2100000, guid: ec8b3c662eee4ca4f915816b9b0b8fd1, type: 2}
+    materialEquip: 0
+    skinEquip: 0
+    weaponEquip: 0
 --- !u!1 &360366408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1139,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &1130288043 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 1592825661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1134154442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1341,7 +1356,7 @@ PrefabInstance:
     - target: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e546f60e9cfb1584cb477f90acbf8a05, type: 2}
+      objectReference: {fileID: 2100000, guid: 77c15c419a8c52046a461d5daeca8bdc, type: 2}
     - target: {fileID: -8680920848529040888, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.00000008221105

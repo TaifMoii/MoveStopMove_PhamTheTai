@@ -10,7 +10,26 @@ public class GameManager : Singleton<GameManager>
 {
     private static GameState gameState;
     public Canvas joyStick;
-    public PlayerData playerData;
+    [SerializeField] PlayerData playerData;
+    public PlayerData PlayerData
+    {
+        get
+        {
+            //check tra ve gia tri cua playerData
+            if (playerData == null)
+            {
+                playerData = new();
+            }
+            return playerData;
+        }
+        set
+        {
+            //get la chi doc 
+            //set la duoc sua du lieu
+            playerData = value;
+        }
+    }
+
 
     public static void ChangeState(GameState state)
     {
@@ -36,7 +55,6 @@ public class GameManager : Singleton<GameManager>
             Screen.SetResolution(Mathf.RoundToInt(ratio * (float)maxScreenHeight), maxScreenHeight, true);
         }
 
-        playerData = new PlayerData();
 
         DontDestroyOnLoad(gameObject);
     }

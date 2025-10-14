@@ -15,7 +15,6 @@ public class UIMainMenu : UICanvas
 
     public TextMeshProUGUI coinText;
 
-    private float coin { get; set; }
 
     void Awake()
     {
@@ -31,7 +30,7 @@ public class UIMainMenu : UICanvas
     }
     public void Update()
     {
-        coinText.text = GameManager.Ins.playerData.Coin.ToString();
+        coinText.text = GameManager.Ins.PlayerData.Coin.ToString();
     }
 
     public void ButtonPlayClick()

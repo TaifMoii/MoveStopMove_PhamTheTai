@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 2816804456181740077}
   - component: {fileID: 2844392199726490426}
   m_Layer: 0
-  m_Name: Button - UnEquipped
+  m_Name: Button - Equipped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,10 +396,18 @@ MonoBehaviour:
   priceText: {fileID: 8936140985890261147}
   iconImage: {fileID: 4248503616980133932}
   buttonBuy: {fileID: 4134701921392884548}
-  buttonEquip: {fileID: 4216237774855436131}
-  buttonUnEquip: {fileID: 2844392199726490426}
+  buttonEquip: {fileID: 2844392199726490426}
+  buttonUnEquip: {fileID: 4216237774855436131}
   lockImage: {fileID: 6693860252089102494}
   currentType: 0
+  weaponData:
+    index: 0
+    weaponName: 
+    icon: {fileID: 0}
+    price: 0
+    isEquipped: 0
+    isPurchased: 0
+  isLocked: 0
 --- !u!1 &2821508616509140546
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +554,7 @@ GameObject:
   - component: {fileID: 5144362646183162280}
   - component: {fileID: 4216237774855436131}
   m_Layer: 0
-  m_Name: Button - Equipped
+  m_Name: Button - UnEquipped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

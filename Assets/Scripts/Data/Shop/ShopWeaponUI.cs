@@ -7,6 +7,7 @@ public class ShopWeaponUI : Singleton<ShopWeaponUI>
     public DataWeaponSO weaponData;
     public ItemWeapon weaponPrefab;
     public Transform content;
+    public PlayerData playerData;
 
     private List<ItemWeapon> weaponItems = new List<ItemWeapon>();
 
@@ -15,24 +16,19 @@ public class ShopWeaponUI : Singleton<ShopWeaponUI>
         foreach (var weapon in weaponData.weapons)
         {
             ItemWeapon newItem = Instantiate(weaponPrefab, content);
-            newItem.WeaponInit(weapon);
+            newItem.WeaponInit(weapon, this);
             weaponItems.Add(newItem);
         }
     }
-    public void UpdateWeapon(ItemWeapon item, DataWeapon newWeaponData)
+    public void UpdateWeapon(int id)
     {
         foreach (var weapon in weaponItems)
         {
-            if (weapon != item && weapon.currentType == WeaponType.Equipped)
+            if (weapon.weaponData.index != id)
             {
-                weapon.Init(WeaponType.UnEquipped);
-                newWeaponData.isEquipped = true;
-            }
-            if (weapon == item && weapon.currentType == WeaponType.Equipped)
-            {
-                weapon.Init(WeaponType.Equipped);
-                newWeaponData.isEquipped = false;
+                weapon.SwitchItemType(WeaponType.UnEquipped);
             }
         }
     }
+
 }

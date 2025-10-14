@@ -17,10 +17,14 @@ public class ItemSkin : MonoBehaviour
     public GameObject lockImage;
     public ItemType currentType;
 
-    DataWeapon weaponData;
     public DataSkin skinData;
-    ItemType itemType;
     public bool isLocked;
+    ItemType itemType;
+
+    // playerData = GameManager.Ins.PlayerData;
+    PlayerData playerData => GameManager.Ins.PlayerData;
+
+
 
     void Awake()
     {
@@ -67,7 +71,6 @@ public class ItemSkin : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log("SwitchItemType: " + itemType);
     }
     public void LockInit()
     {
@@ -76,15 +79,9 @@ public class ItemSkin : MonoBehaviour
         buttonUnEquip.gameObject.SetActive(false);
         lockImage.SetActive(true);
     }
-    public void WeaponInit(DataWeapon weaponDatas)
-    {
-        weaponData = weaponDatas;
-        iconImage.sprite = weaponData.icon;
-        priceText.text = weaponData.price.ToString();
-    }
+
     public void SkinInit(DataSkin skinDatas, ShopSkinUI shopSkinUI)
     {
-
         skinData = skinDatas;
         iconImage.sprite = skinData.icon;
         priceText.text = skinData.price.ToString();
@@ -93,12 +90,13 @@ public class ItemSkin : MonoBehaviour
     {
         isLocked = false;
         Init(ItemType.UnEquipped);
+        playerData.BuySkin(skinData.index);
     }
     private void Equip()
     {
         Init(ItemType.Equipped);
         ShopSkinUI.Ins.UpdateSkin(skinData.index);
-
+        playerData.EquipSkin(skinData.index);
     }
 
     private void UnEquip()

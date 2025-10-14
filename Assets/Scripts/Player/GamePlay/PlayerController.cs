@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using Cinemachine;
-using Unity.VisualScripting;
 [RequireComponent(typeof(LineRenderer))]
 
 public class PlayerController : Character
@@ -18,7 +15,6 @@ public class PlayerController : Character
     public Rigidbody rb;
     private IState currentState;
     private Transform target;
-    CameraFollow cameraFollow;
 
 
 
@@ -29,7 +25,6 @@ public class PlayerController : Character
 
     public override void OnInit(Vector3 des)
     {
-        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         rb = GetComponent<Rigidbody>();
         base.OnInit(des);
         ChangeState(new MainMenuState());
@@ -94,13 +89,8 @@ public class PlayerController : Character
         {
             target = hitEnemies[0].transform;
         }
+    }
 
-    }
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
 
     public void ChangeState(IState state)
     {
@@ -126,12 +116,6 @@ public class PlayerController : Character
         transform.rotation = Quaternion.LookRotation(lookPos);
 
         StartCoroutine(WaitAttack(target.transform));
-
-    }
-    public override void OnDeath()
-    {
-        base.OnDeath();
-        ChangeState(new DeathState());
     }
     IEnumerator WaitAttack(Transform enenmy)
     {
@@ -141,13 +125,12 @@ public class PlayerController : Character
         weapons.OnInit(enenmy.transform, this);
         weapons.DespawnWeapon();
     }
-    public void AddYOffset(CinemachineVirtualCamera vcam)
+    public override void OnDeath()
     {
-        var transposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
-        if (transposer != null)
-        {
-            transposer.m_TrackedObjectOffset.y += 1f;   // cộng thêm 1 vào Y
-        }
+        base.OnDeath();
+        ChangeState(new DeathState());
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 [System.Serializable]
 public class PlayerData
@@ -7,10 +8,20 @@ public class PlayerData
     [SerializeField] DataSkinSO skinData;
     [SerializeField] DataWeaponSO weaponData;
     public int Coin;
+    public SkinnedMeshRenderer material;
     // todo : list<int>QA va weapon da mua
     // bien int la nhung thu dang mac
+
+    public List<int> purchasedSkins = new List<int>();
+    public List<int> purchasedWeapons = new List<int>();
+    public List<Material> materialsLists = new List<Material>();
+    public int materialEquip;
+    public int skinEquip;
+
+    public int weaponEquip;
     // check neu id cua do co trong list thi la da mua roi
     // neu khong co thi chua mua
+
 
     //neu mua thi add vao list
     //neu muon mac thi add id do vao bien int
@@ -23,34 +34,97 @@ public class PlayerData
 
     // check neu id bang id do dang mac thi la dang mac
     // neu khong bang thi la khong mac
-    public List<int> purchasedSkins = new List<int>();
-    public List<int> purchasedWeapons = new List<int>();
 
-    public void Init()
+    public void Awake()
     {
-        Coin = 1000; //khoi tao so coin ban dau
+
+    }
+    public void ChangeMaterial()
+    {
+        if (material != null && materialEquip >= 0 && materialEquip < materialsLists.Count)
+        {
+            material.material = materialsLists[materialEquip];
+        }
     }
 
-    public DataSkin GetDataSkin(int index)
+    public void BuyWeapon(int id)
     {
-        DataSkin found = skinData.skins.Find(skin => skin.index == index);
-
-        if (found == null)
+        if (CheckWeaponHasBought(id))
         {
-            Debug.LogWarning("Skin with index " + index + " not found.");
-            found = skinData.skins[0]; // Hoặc xử lý khác nếu không tìm thấy
+            Debug.Log("Is purchased");
+            return;
         }
-        return found;
+        purchasedWeapons.Add(id);
+        Debug.Log("Purchased");
+
     }
-    public DataWeapon GetDataWeapon(int index)
+    public void BuySkin(int id)
     {
-        DataWeapon found = weaponData.weapons.Find(weapon => weapon.index == index);
-
-        if (found == null)
+        if (CheckSkinHasBought(id))
         {
-            Debug.LogWarning("Weapon with index " + index + " not found.");
-            found = weaponData.weapons[0]; // Hoặc xử lý khác nếu không tìm thấy
+            Debug.Log("Is purchased");
+            return;
         }
-        return found;
+        purchasedSkins.Add(id);
+        Debug.Log("Purchased");
+
+    }
+
+    public bool CheckWeaponHasBought(int id)
+    {
+
+        for (int i = 0; i < weaponData.weapons.Count; i++)
+        {
+            if (i == id)
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
+    public bool CheckSkinHasBought(int id)
+    {
+        for (int i = 0; i < skinData.skins.Count; i++)
+        {
+            if (i == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void EquipSkin(int id)
+    {
+        if (!CheckSkinHasBought(id))
+        {
+            return;
+        }
+        if (skinEquip != id)
+        {
+            skinEquip = id;
+            materialEquip = id;
+            ChangeMaterial();
+        }
+        else
+        {
+            ChangeMaterial();
+            Debug.Log("Is Using !");
+        }
+    }
+    public void EquipWeapon(int id)
+    {
+        if (!CheckWeaponHasBought(id))
+        {
+            return;
+        }
+        if (weaponEquip != id)
+        {
+            weaponEquip = id;
+        }
+        else
+        {
+            Debug.Log("Is Using !");
+        }
     }
 }

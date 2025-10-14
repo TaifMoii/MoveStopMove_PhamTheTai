@@ -22,8 +22,6 @@ public class ShopSkinUI : Singleton<ShopSkinUI>
     {
         foreach (var skin in skins)
         {
-            Debug.Log("Update Skin UI" + id + " - " + skin.skinData.index);
-
             if (skin.skinData.index != id)
             {
                 skin.SwitchItemType(ItemType.UnEquipped);

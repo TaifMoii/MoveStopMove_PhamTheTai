@@ -15,7 +15,7 @@ public class UIShop : UICanvas
         backMainMenu.onClick.AddListener(BackMainMenu);
         UIShopWeapon.SetActive(true);
         UIShopSkin.SetActive(false);
-        coinText.text = GameManager.Ins.playerData.Coin.ToString();
+        coinText.text = GameManager.Ins.PlayerData.Coin.ToString();
     }
     void OnDestroy()
     {

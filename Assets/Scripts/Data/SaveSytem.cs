@@ -8,13 +8,13 @@ public class SaveSytem : MonoBehaviour
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            GameManager.Ins.playerData = JsonUtility.FromJson<PlayerData>(json);
+            GameManager.Ins.PlayerData = JsonUtility.FromJson<PlayerData>(json);
         }
     }
     public void SavePlayerData()
     {
         string path = Application.persistentDataPath + "/playerdata.json";
-        string json = JsonUtility.ToJson(GameManager.Ins.playerData);
+        string json = JsonUtility.ToJson(GameManager.Ins.PlayerData);
         File.WriteAllText(path, json);
     }
     public void Delete()
